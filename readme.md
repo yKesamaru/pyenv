@@ -1,11 +1,12 @@
-# 旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる
+# 旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順
 
 ## はじめに
 少し前にシステムを`Ubuntu 20.04`から`Ubuntu 22.04`へ移行しました。
 新システムに移行にあたり、`Python`のバージョンが`3.8`から`3.10`へ変化しました。
 
-このとき旧システムの`python仮想環境(venv)`で作成されたプロフェクトフォルダをアクティベートしようとすると、新システムのPythonが起動されます。
+このとき旧システムの`python仮想環境(venv)`で作成されたプロフェクトフォルダをアクティベートしようとすると、新システムのPythonが起動されてしまいます。
 `ROOT/bin/python3`がシステムPythonへのシンボリックリンクになっているからです。（`ROOT`はプロジェクトのルートパス）
+旧システムの`venv仮想環境のpythonバージョン`が合っていないと、この仮想環境を使用できません。
 
 ではどうするかというと、`pyenv`で旧システムのPythonをエミュレートするか、`GNOME Boxes`で`Ubuntu 20.04`環境を作成し、その中でプロフェクトフォルダを動作させるか、になります。
 
@@ -18,13 +19,13 @@
 
 ![](assets/eye-catch.png)
 
-- [旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる](#旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる)
+- [旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順](#旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順)
   - [はじめに](#はじめに)
   - [環境](#環境)
   - [`pyenv`インストール](#pyenvインストール)
     - [依存関係のインストール](#依存関係のインストール)
     - [`pyenv`本体のインストール](#pyenv本体のインストール)
-  - [`.profile`, `.bash_profile`, `.bashrc`への追加記述内容](#profile-bash_profile-bashrcへの追加記述内容)
+  - [`.profile`, `.bash_profile`, `.bashrc`へ追加記述](#profile-bash_profile-bashrcへ追加記述)
     - [`.profile`](#profile)
     - [`.bash_profile`](#bash_profile)
     - [`.bashrc`](#bashrc)
@@ -51,6 +52,9 @@ System:
 
 ## `pyenv`インストール
 
+`pyenv`公式
+https://github.com/pyenv/pyenv
+
 ### 依存関係のインストール
 ビルドに必要なパッケージは事前にインストールしておきます。
 
@@ -72,10 +76,8 @@ https://github.com/pyenv/pyenv?tab=readme-ov-file#automatic-installer
 curl https://pyenv.run | bash
 ```
 
-## `.profile`, `.bash_profile`, `.bashrc`への追加記述内容
+## `.profile`, `.bash_profile`, `.bashrc`へ追加記述
 
-- `pyenv`公式
-  https://github.com/pyenv/pyenv
 
 上記それぞれのファイルに以下を記述します。
 
@@ -149,7 +151,7 @@ Available versions:
 `venv`ですでに仮想環境が作成されている状態なのですが、`pyenv`でこれに適合したバージョンのPythonをインストールするときは、**マイクロバージョンまで一致したバージョン**である必要があります。
 
 例えば`3.8系`の最終バージョンは`3.8.19`ですが、旧システムの`venv`で作成した仮想環境は`3.8.10`です。
-もし`pyenv`で`3.8.19`をインストールしても`venv仮想環境`適合しないためプロジェクトを動作させることはできません。
+もし`pyenv`で`3.8.19`をインストールしても`venv仮想環境`と適合しないためプロジェクトを動作させることはできません。
 旧システムの`venv仮想環境`のマイクロバージョンを調べるには、以下のファイルをロードします。
 ```bash
 $ cat ~/bin/FACE01/pyenv.cfg
