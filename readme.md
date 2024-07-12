@@ -17,7 +17,7 @@
 
 この記事では備忘録を兼ね、ステップバイステップでこの手順を記録します。
 
-![](assets/eye-catch.png)
+![](https://raw.githubusercontent.com/yKesamaru/pyenv/master/assets/eye-catch.png)
 
 - [旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順](#旧システムvenvで作成された仮想環境中のプロジェクトをpyenvで動作させる手順)
   - [はじめに](#はじめに)
@@ -205,7 +205,7 @@ $ source bin/activate
 
 ### 仮想環境中の`python3`リンクを変更
 `ROOT/bin/`ディレクトリには、システムPythonへのリンクが存在します。
-![](assets/2024-07-12-11-47-21.png)
+![](https://raw.githubusercontent.com/yKesamaru/pyenv/master/assets/2024-07-12-11-47-21.png)
 `. bin/activate`を行うと、このリンクをたどってシステムPythonが起動してしまうため、これらのシンボリックリンクを変更します。
 ```bash
 user@user:~/bin/FACE01/bin$ cd /home/user/bin/FACE01/bin  # プロジェクトのルートパス
